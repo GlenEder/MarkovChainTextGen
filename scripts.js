@@ -39,6 +39,7 @@ function createGoodness() {
     }
 
     console.log(newShit)
+    document.getElementById("MarkovText").innerHTML = newShit
 
 }
 
