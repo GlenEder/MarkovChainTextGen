@@ -1,4 +1,5 @@
 
+var words = []
 
 //Ouputs markov text from provided input
 function generateText() {
@@ -12,10 +13,42 @@ function generateText() {
 //handles keying input text
 function parseInput(input) {
 
-  console.log(input)
+    var started = false
+    var begin = 0
+    var end = 0
+
+    for(var i = 0; i < input.length; i++) {
+
+        //check if letter
+        if(isValidChar(input.charAt(i))) {
+
+            if(!started) {
+                begin = i
+                started = true
+            }else {
+                end = i
+            }
+
+        }
+        else {
+            if(started) {
+                started = false
+                console.log(input.substring(begin, end + 1))
+            }
+        }
+    }
 
 }
 
+function isValidChar(toCheck) {
+
+    var ascii = toCheck.charCodeAt(0)
+    if( (ascii > 64 && ascii < 91) || (ascii > 96 && ascii < 123)) {
+        return true
+    }
+
+    return false
+}
 
 
 
