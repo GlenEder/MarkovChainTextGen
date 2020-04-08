@@ -4,13 +4,17 @@
 
     <head>
         <title>Markov Chain Text</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="scripts.js"></script>
     </head>
 
     <body>
        <label>Select Input File: </label> <input id="inputFile" type="file"></input>
 
+        <ul id="inputFiles"> </ul>
+
         <br/>
-        <button id="genText">Generate Markov Chain Text</button> 
+        <button id="genText" onclick="addTextFile()">Generate Markov Chain Text</button> 
     </body>
 
 
