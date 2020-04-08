@@ -3,6 +3,8 @@
 var inputFiles = []         //array of input files
 var textInput = []          //array of text contents of files 
 
+var filesLoaded = 0         //number of files loaded 
+
 //Adds text file to input files array 
 function addTextFile() {
 
@@ -26,12 +28,37 @@ function addInputFileToUL(fileName) {
 
 
 //Ouputs markov text from provided input
-function generateText() {
+async function generateText() {
+
+    console.log("Generating Text...")
 
     inputFiles.forEach( item => {
+        console.log("Parsing file")
         parseFile(item)
     })
 
+    while(filesLoaded != inputFiles.length) { await new Promise(r => setTimeout(r, 1000)) }
+    parseInput()
+
+}
+
+//handles keying input text
+function parseInput() {
+
+    console.log("Parsing Inputs")
+    console.log(inputFiles)
+    console.log(textInput)
+
+    textInput.forEach(item => {
+        console.log(item)
+    })
+
+}
+
+//Adds input to input text array
+function addTextInput(inputText) {
+    console.log("Pushing: " + inputText)
+    textInput.push(inputText)
 }
 
 
@@ -46,9 +73,11 @@ function parseFile(file) {
     //create file reader 
     var reader = new FileReader()
 
+    console.log("reading file")
+
     if(file.files && file.files[0]) {
         reader.onload = function (e) {
-            textInput.push(e.target.result)
+          addTextInput(e.target.result)
         }
 
         reader.readAsText(file.files[0])
@@ -56,7 +85,5 @@ function parseFile(file) {
     else {
         alert("Error reading file.")
     }
-
-
 
 }
