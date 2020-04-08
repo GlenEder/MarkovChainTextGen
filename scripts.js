@@ -10,6 +10,38 @@ function generateText() {
 
 }
 
+//use word mapping to create text 
+function createGoodness() {
+
+    var numWords = 100
+    var startAt = Math.floor(Math.random() * words.keys.length)
+
+    //Assign starting word
+    var iter = words.keys()
+    var newShit = ""
+    for(var w of iter) {
+        newShit = w
+    }
+    
+
+    //Save last word for key 
+    var lastWord = newShit
+    
+
+    for(var i = 0; i < numWords - 1; i++) {
+
+        newShit += " "
+        var newWord = words.get(lastWord).getWord()
+        newShit += newWord
+        lastWord = newWord
+
+
+    }
+
+    console.log(newShit)
+
+}
+
 //handles keying input text
 function parseInput(input) {
 
@@ -66,6 +98,7 @@ function parseInput(input) {
 
 
     console.log(words)
+    createGoodness()
 }
 
 function isValidChar(toCheck) {

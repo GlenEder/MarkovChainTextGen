@@ -12,5 +12,9 @@ class Followers {
         this.followers.push(word)
     }
 
+    getWord() {
+        return this.followers[Math.floor(Math.random() * this.followers.length)]
+    }
+
 
 }
