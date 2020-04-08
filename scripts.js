@@ -8,7 +8,6 @@ var filesLoaded = 0         //number of files loaded
 //Adds text file to input files array 
 function addTextFile() {
 
-    console.log("Adding text file")
     var textFile = document.getElementById("inputFile")
     inputFiles.push(textFile)
 
@@ -30,14 +29,16 @@ function addInputFileToUL(fileName) {
 //Ouputs markov text from provided input
 async function generateText() {
 
-    console.log("Generating Text...")
 
     inputFiles.forEach( item => {
-        console.log("Parsing file")
         parseFile(item)
     })
 
-    while(filesLoaded != inputFiles.length) { await new Promise(r => setTimeout(r, 1000)) }
+    while(filesLoaded != inputFiles.length) {
+        console.log("here")
+         await new Promise(r => setTimeout(r, 1000))
+        
+    }
     parseInput()
 
 }
@@ -45,9 +46,7 @@ async function generateText() {
 //handles keying input text
 function parseInput() {
 
-    console.log("Parsing Inputs")
-    console.log(inputFiles)
-    console.log(textInput)
+    console.log("Parsing inputs for generator")
 
     textInput.forEach(item => {
         console.log(item)
@@ -57,8 +56,8 @@ function parseInput() {
 
 //Adds input to input text array
 function addTextInput(inputText) {
-    console.log("Pushing: " + inputText)
     textInput.push(inputText)
+    filesLoaded += 1
 }
 
 
@@ -73,7 +72,6 @@ function parseFile(file) {
     //create file reader 
     var reader = new FileReader()
 
-    console.log("reading file")
 
     if(file.files && file.files[0]) {
         reader.onload = function (e) {
