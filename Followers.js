@@ -1,9 +1,8 @@
 
 
-class Word {
+class Followers {
 
-    constructor(word, follower) {
-        this.word = word
+    constructor(follower) {
         this.followers = []
         this.followers.push(follower)
     }

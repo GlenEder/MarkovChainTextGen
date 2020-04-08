@@ -1,5 +1,5 @@
 
-var words = []
+var words = new Map()
 
 //Ouputs markov text from provided input
 function generateText() {
@@ -17,7 +17,11 @@ function parseInput(input) {
     var begin = 0
     var end = 0
 
+    var lastWord = ""
+    var lastWordSet = false
+
     for(var i = 0; i < input.length; i++) {
+
 
         //check if letter
         if(isValidChar(input.charAt(i))) {
@@ -33,7 +37,25 @@ function parseInput(input) {
         else {
             if(started) {
                 started = false
-                console.log(input.substring(begin, end + 1))
+                var newWord = input.substring(begin, end + 1)
+
+
+                if(lastWordSet) {
+
+                    
+                    //check map for existing word
+                    if(words.has(lastWord)) {
+                        console.log(words.get(lastWord))
+                    }
+                    else {
+                        words.set(lastWord, new Followers(newWord))
+                    }
+
+                }
+                else {
+                    lastWord = newWord
+                    lastWordSet = true
+                }
             }
         }
     }
