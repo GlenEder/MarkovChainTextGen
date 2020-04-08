@@ -42,14 +42,18 @@ function parseInput(input) {
 
                 if(lastWordSet) {
 
-                    
+                
                     //check map for existing word
                     if(words.has(lastWord)) {
-                        console.log(words.get(lastWord))
+
+                        words.get(lastWord).addFollower(newWord)
+
                     }
                     else {
                         words.set(lastWord, new Followers(newWord))
                     }
+
+                    lastWord = newWord
 
                 }
                 else {
@@ -60,6 +64,8 @@ function parseInput(input) {
         }
     }
 
+
+    console.log(words)
 }
 
 function isValidChar(toCheck) {
