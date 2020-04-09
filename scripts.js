@@ -14,33 +14,55 @@ function generateText() {
 //use word mapping to create text 
 function createGoodness() {
 
-    var numWords = 100
-    var startAt = Math.floor(Math.random() * words.keys.length)
+    var numPhrases = 100
 
-    //Assign starting word
-    var iter = words.keys()
-    var newShit = ""
-    for(var w of iter) {
-        newShit = w
-    }
+    //get starting word
+    var newShit = getNewWord()
     
 
     //Save last word for key 
     var lastWord = newShit
     
 
-    for(var i = 0; i < numWords - 1; i++) {
+    for(var i = 0; i < numPhrases - 1; i++) {
+
+        var newWord = ""
+
+        if(words.has(lastWord)) {
+            newWord = words.get(lastWord).getWord()
+        }
+        else {
+            var newWord = getNewWord()
+        }
 
         newShit += " "
-        var newWord = words.get(lastWord).getWord()
         newShit += newWord
         lastWord = newWord
-
-
+       
     }
 
     console.log(newShit)
     document.getElementById("MarkovText").innerHTML = newShit
+
+}
+
+
+//Get random word from map
+function getNewWord() {
+
+    var startAt = Math.floor(Math.random() * words.keys.length)
+
+    //Assign starting word
+    var iter = words.keys()
+    var newShit = ""
+    var pos = 0
+    for(var w of iter) {
+        newShit = w
+        if(pos === startAt) break
+        pos++
+    }
+
+    return newShit
 
 }
 
