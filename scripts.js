@@ -50,7 +50,9 @@ function createGoodness() {
 //Get random word from map
 function getNewWord() {
 
-    var startAt = Math.floor(Math.random() * words.keys.length)
+    
+    var startAt = Math.floor(Math.random() * words.size)
+
 
     //Assign starting word
     var iter = words.keys()
