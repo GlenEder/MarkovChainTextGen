@@ -102,13 +102,22 @@ function parseInput(input) {
     createGoodness()
 }
 
+//checks if char is valid for word
 function isValidChar(toCheck) {
 
     var ascii = toCheck.charCodeAt(0)
+
+    //check for letters 
     if( (ascii > 64 && ascii < 91) || (ascii > 96 && ascii < 123)) {
         return true
     }
 
+    //Check for puncuation marks
+    if(toCheck === '\'' || toCheck === "!" || toCheck === "." || toCheck === "?") {
+        return true
+    }  
+
+    //Not valid
     return false
 }
 
