@@ -16,5 +16,9 @@ class Followers {
         return this.followers[Math.floor(Math.random() * this.followers.length)]
     }
 
+    getNumFollowers() {
+        return this.followers.length
+    }
+
 
 }

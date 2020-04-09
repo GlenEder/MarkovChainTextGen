@@ -5,8 +5,9 @@ var cquenceLen = 2
 //Ouputs markov text from provided input
 function generateText() {
 
+    words.clear()
     var textFile = document.getElementById("inputFile")
-    console.log(textFile)
+    //console.log(textFile)
     parseFile(textFile)
 
 }
@@ -41,9 +42,17 @@ function createGoodness() {
        
     }
 
-    console.log(newShit)
+    //console.log(newShit)
     document.getElementById("MarkovText").innerHTML = newShit
 
+    var longest = 0
+    words.forEach(item => {
+        if(item.getNumFollowers() > longest) {
+            longest = item.getNumFollowers() 
+        }
+    })
+
+    console.log(longest)
 }
 
 
