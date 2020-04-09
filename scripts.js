@@ -1,5 +1,6 @@
 
 var words = new Map()
+var cquenceLen = 2
 
 //Ouputs markov text from provided input
 function generateText() {
@@ -50,6 +51,8 @@ function parseInput(input) {
     var begin = 0
     var end = 0
 
+    var phraseLen = 0   //length of current phrase being recorded
+
     var lastWord = ""
     var lastWordSet = false
 
@@ -69,30 +72,38 @@ function parseInput(input) {
         }
         else {
             if(started) {
-                started = false
-                var newWord = input.substring(begin, end + 1)
 
+                if(phraseLen == cquenceLen - 1) {
+                    started = false
+                    var newWord = input.substring(begin, end + 1)
 
-                if(lastWordSet) {
+                    //check if first word to be recorded 
+                    if(lastWordSet) {
+                    
+                        //check map for existing word
+                        if(words.has(lastWord)) {
 
-                
-                    //check map for existing word
-                    if(words.has(lastWord)) {
+                            words.get(lastWord).addFollower(newWord)
 
-                        words.get(lastWord).addFollower(newWord)
+                        }
+                        else {
+                            words.set(lastWord, new Followers(newWord))
+                        }
+
+                        lastWord = newWord
 
                     }
                     else {
-                        words.set(lastWord, new Followers(newWord))
+                        lastWord = newWord
+                        lastWordSet = true
                     }
 
-                    lastWord = newWord
-
+                    phraseLen = 0
                 }
                 else {
-                    lastWord = newWord
-                    lastWordSet = true
+                    phraseLen += 1
                 }
+                
             }
         }
     }
